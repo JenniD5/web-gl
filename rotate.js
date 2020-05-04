@@ -1,28 +1,28 @@
 const canvas = document.getElementById('glcanvas');
 const gl = canvas.getContext('webgl2');
 
+
+
 // clear screen
-
-
-const render = ()=>{
-    gl.clearColor(0, 0, 0, 1);
-    gl.clear(gl.COLOR_BUFFER_BIT);
+const render = () =>{
+gl.clearColor(0, 0, 0, 1);
+gl.clear(gl.COLOR_BUFFER_BIT);
 }
-
-//render();
-
 //Declare shader
+
+
+
 
 const vertexShader = `#version 300 es
     precision mediump float;
     in vec2 position;
     in vec3 color;
     out vec3 vColor;
-    uniform float iTime;
+    uniform mat4 modelMatrix; 
     void main()
     {
-        gl_Position = vec4(position, 0, 1);
-        vColor = vec3(abs(sin(iTime)), color.y, color.z);
+        gl_Position = modelMatrix * vec4(position, 0, 1);
+        vColor = color;
     }
 `;
 
@@ -81,34 +81,46 @@ const vertexColor = [
 
 const positionBuffer = gl.createBuffer();
 const colorBuffer = gl.createBuffer();
+const position = gl.getAttribLocation(program, 'position');
+const color = gl.getAttribLocation(program, 'color');
+const mMatrix = gl.getUniformLocation(program, 'modelMatrix');
 
+const rotSpeed = document.getElementById('rotateSpeed');
 
+const modelMatrix = mat4.create();
 
+let now = Date.now();
 //animation 
-const now = Date.now();
+
 
 const update = ()=>{
 
     render();
 
-    const deltaTime = Date.now() - now;
+    const deltaTime = (Date.now() - now) * 0.001;
+    
+     now=Date.now();
 
-    console.log(deltaTime);
 
 
+    
+    mat4.rotate(
+    modelMatrix,
+     modelMatrix,
+    deltaTime * rotSpeed.value,
+    [0,0,1]
+    );
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleCoords), gl.STATIC_DRAW);
-    const position = gl.getAttribLocation(program, 'position');
+   
+    gl.uniformMatrix4fv(mMatrix, false, modelMatrix);
     gl.enableVertexAttribArray(position);
     gl.vertexAttribPointer(position, 2, gl.FLOAT, gl.FALSE, 0, 0);
 
-    //iTime
-    const iTime = gl.getUniformLocation(program, 'iTime');
-    gl.uniform1f(iTime, deltaTime / 1000);
-
+    
     gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexColor), gl.STATIC_DRAW);
-    const color = gl.getAttribLocation(program, 'color');
+ 
     gl.enableVertexAttribArray(color);
     gl.vertexAttribPointer(color, 3, gl.FLOAT, gl.FALSE, 0, 0);
 
