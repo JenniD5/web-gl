@@ -1,0 +1,32 @@
+{
+  "name": "web-gl",
+  "version": "1.0.0",
+  "description": "proyecto de web-gl",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JenniD5/web-gl.git"
+  },
+  "keywords": [
+    "webgl",
+    "games",
+    "cg",
+    "shader",
+    "glsl",
+    "2d",
+    "3d"
+  ],
+  "author": "Jenni Yáñez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JenniD5/web-gl/issues"
+  },
+  "homepage": "https://github.com/JenniD5/web-gl#readme"
+}
