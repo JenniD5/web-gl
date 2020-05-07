@@ -10,37 +10,41 @@ res.send('<h1>Hello word node<h1>');
 });
 
 app.get('/translate', (req,res)=>{
-    res.sendfile('public/translate.html');
+    res.sendFile(`${__dirname}/public/translate.html`);
     });
 
 
 app.get('/circle', (req,res)=>{
-    res.sendfile('public/circle-triangle-fan.html');
+    res.sendFile(`${__dirname}/public/circle-triangle-fan.html`);
     });
 
 app.get('/animation', (req,res)=>{
-    res.sendfile('public/color-animation.html');
+    res.sendFile(`${__dirname}/public/color-animation.html`);
     });
 app.get('/rotate', (req,res)=>{
-    res.sendfile('public/rotate.html');
+    res.sendFile(`${__dirname}/public/rotate.html`);
     });
-app.get('/scale', (req,res)=>{
-    res.sendfile('public/scale.html');
+app.get('/scale', (req, res)=>{
+    res.sendFile(`${__dirname}/public/scale.html`);
     });
 app.get('/square', (req,res)=>{
-    res.sendfile('public/square-t.html');
+    res.sendFile(`${__dirname}/public/square-t.html`);
 });
 app.get('/striangle', (req,res)=>{
-    res.sendfile('public/square-triangle.html');
+    res.sendFile(`${__dirname}/public/square-triangle.html`);
 });
 app.get('/tringles', (req,res)=>{
-    res.sendfile('public/triangles.htm');
+    res.sendFile(`${__dirname}/public/triangles.htm`);
 });
 app.get('/color', (req,res)=>{
-    res.sendfile('public/vertexcolor.htm');
+    res.sendFile(`${__dirname}/public/vertexcolor.htm`);
 });
 app.get('/basic', (req,res)=>{
-res.sendfile('public/basic2.htm');
+res.sendFile(`${__dirname}/public/basic2.htm`);
 });
+app.get('/matriz', (req,res)=>{
+res.sendFile(`${__dirname}/public/ModelMatrix.html`);
+});
+    
 
 app.listen(port, console.log(`listening at http://localhost:${port}`)); 
