@@ -12,10 +12,15 @@ const vertexShader = `#version 300 es
     precision mediump float;
     in vec2 position;
     in vec3 color;
-    out vec3 vColor;
+    out vec3 vColor;  
+
+    uniform mat4 modelMatrix;
+    uniform mat4 projectionMatrix;
+    uniform mat4 viewMatrix;
+
     void main()
     {
-        gl_Position = vec4(position, 0, 1);
+        gl_Position = projectionMatrix * (modelMatrix * vec4(position, 0, 1)) *viewMatrix;
         vColor = color;
     }
 `;
@@ -60,10 +65,10 @@ if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
 gl.useProgram(program);
 
 const triangleCoords = [
-    -0.5, -0.5, 
-    0.5, -0.5, 
-    -0.5, 0.5, 
-    0.5, 0.5
+    -1, -1, 
+    1, -1, 
+    -1,1, 
+    1, 1
 ];
 
 const vertexColor = [
@@ -73,8 +78,42 @@ const vertexColor = [
     1, 0, 0
 ];
 
+
+
+const modelMatrix = mat4.create();
+const projectionMatrix = mat4.create();
+const viewMatrix = mat4.create();
+
+mat4.translate(
+modelMatrix,
+modelMatrix,
+[0,0,0]
+);
+
+mat4.perspective(
+projectionMatrix,
+45*(Math.PI/180),
+canvas.clientWidth /canvas.clientHeight,
+-0.1,
+100
+);
+mat4.translate(
+    viewMatrix,
+    viewMatrix,
+    [0,0,50]
+)
+/*no se ocuan buffers para las uniformes */
 const positionBuffer = gl.createBuffer();
 const colorBuffer = gl.createBuffer();
+
+const mMatrix = gl.getUniformLocation(program, 'modelMatrix');
+gl.uniformMatrix4fv(mMatrix, false , modelMatrix);
+
+const pMatrix = gl.getUniformLocation(program, 'projectionMatrix');
+gl.uniformMatrix4fv(pMatrix, false , projectionMatrix);
+
+const vMatrix = gl.getUniformLocation(program, 'viewMatrix');
+gl.uniformMatrix4fv(vMatrix, false , viewMatrix);
 
 gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleCoords), gl.STATIC_DRAW);
