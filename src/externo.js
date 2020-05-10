@@ -1,4 +1,4 @@
-import Shader from './Engine/Shader.js';
+import Shader from './Engine/Shader/Shader.js';
 const canvas = document.getElementById('glcanvas');
 const gl = canvas.getContext('webgl2');
 
