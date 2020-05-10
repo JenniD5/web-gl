@@ -1,4 +1,3 @@
-  
 export default class CompileShader{
 
     constructor(gl, shader, source, status){
