@@ -54,6 +54,12 @@ res.sendFile(`${__dirname}/public/ModelMatrix.html`);
 app.get('/external', (req,res)=>{
     res.sendFile(`${__dirname}/public/external1.html`);
     });
+app.get('/textureapp', (req,res)=>{
+ res.sendFile(`${__dirname}/public/textureapp.html`);
+ });
+app.get('/index', (req,res)=>{
+ res.sendFile(`${__dirname}/index.html`);
+});
     
 
 app.listen(port, console.log(`listening at http://localhost:${port}`)); 
