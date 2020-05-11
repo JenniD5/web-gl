@@ -5,6 +5,7 @@ const port= 3000;
 app.use('/src', express.static('src'));
 app.use('/public', express.static('public'));
 app.use('/shaders', express.static('shaders'));
+app.use('/images', express.static('images'));
 
 app.get('/', (req,res)=>{
 res.send('<h1>Hello word node<h1>');
@@ -13,6 +14,10 @@ res.send('<h1>Hello word node<h1>');
 app.get('/translate', (req,res)=>{
     res.sendFile(`${__dirname}/public/translate.html`);
     });
+app.get('/texture', (req,res)=>{
+ res.sendFile(`${__dirname}/public/textureapp.html`);
+ });
+    
 
 
 app.get('/circle', (req,res)=>{
