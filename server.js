@@ -49,7 +49,7 @@ app.get('/color', (req,res)=>{
 app.get('/basic', (req,res)=>{
 res.sendFile(`${__dirname}/public/basic2.htm`);
 });
-app.get('/matriz', (req,res)=>{
+app.get('/matrix', (req,res)=>{
 res.sendFile(`${__dirname}/public/ModelMatrix.html`);
 });
 app.get('/external', (req,res)=>{
