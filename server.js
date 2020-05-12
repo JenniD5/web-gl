@@ -57,6 +57,9 @@ app.get('/external', (req,res)=>{
 app.get('/textureapp', (req,res)=>{
  res.sendFile(`${__dirname}/public/textureapp.html`);
  });
+ app.get('/spriteanim', (req, res)=>{
+    res.sendFile(`${__dirname}/public/spritesheetapp.htm`);
+});
 app.get('/index', (req,res)=>{
  res.sendFile(`${__dirname}/index.html`);
 });

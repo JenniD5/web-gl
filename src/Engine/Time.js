@@ -1,18 +1,20 @@
 export default class Time{
 
     constructor(){
-        this.Time = Date.now;
+        this.time = Date.now();
         this.mDeltaTime = 0;
         this.updateTime();
     }
-    updateTime()
-    {
-        this.mDeltaTime =(Date.now ()-this.time)*0.01;
+
+    updateTime(){
+
+        this.mDeltaTime = (Date.now() - this.time) * 0.001;
         this.time = Date.now();
         requestAnimationFrame(this.updateTime.bind(this));
     }
-    deltaTime()
-    {
+
+    deltaTime(){
+        
         return this.mDeltaTime;
     }
 }
