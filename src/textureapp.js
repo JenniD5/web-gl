@@ -1,10 +1,11 @@
 
 import Shader from './Engine/Shader/Shader.js';
 import Texture from './Engine/Texture.js';
+import Time from './Engine/Time.js';
 
 const canvas = document.getElementById('glcanvas');
 const gl = canvas.getContext('webgl2');
-
+const time = new Time();
 // clear screen
 
 
@@ -66,6 +67,7 @@ const main = async ()=>{
         textures: [
             new Texture(gl, 'images/pngwing.com.png')
         ],
+        time: new Time()
        
 
     }
@@ -78,7 +80,7 @@ const main = async ()=>{
     );
 
     const update = ()=>{
-        console.log(appInfo);
+        console.log(appInfo, time.deltaTime());
         gl.clearColor(0, 0, 0, 1);
         gl.clear(gl.COLOR_BUFFER_BIT);
 
